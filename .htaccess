@@ -1,0 +1,16 @@
+# .htaccess configuration for sulthoni.github.io
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect /sdp to sdp directory
+RewriteRule ^sdp$ /sdp/ [R=301,L]
+
+# Force HTTPS (optional, but recommended)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Custom error pages (optional)
+ErrorDocument 404 /404.html
+
+# Set default directory index
+DirectoryIndex index.html index.htm
