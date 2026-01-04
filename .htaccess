@@ -14,3 +14,12 @@ ErrorDocument 404 /404.html
 
 # Set default directory index
 DirectoryIndex index.html index.htm
+
+# Configure .ttl files to display in browser instead of downloading
+<FilesMatch "\.ttl$">
+    Header set Content-Type "text/turtle; charset=utf-8"
+    Header set Content-Disposition "inline"
+</FilesMatch>
+
+# Alternative: Set MIME type for .ttl files
+AddType "text/turtle; charset=utf-8" .ttl
