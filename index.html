@@ -1,97 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sulthoni's Repository</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 100%;
-        }
-        
-        h1 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            text-align: center;
-        }
-        
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            text-align: center;
-            color: #666;
-        }
-        
-        .links {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .link-button {
-            display: block;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-weight: 500;
-        }
-        
-        .link-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            color: #999;
-            font-size: 0.9em;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Sulthoni's Repository</h1>
-        <p>Welcome to my personal GitHub Pages repository!</p>
-        <p>This site hosts various projects and resources.</p>
-        
-        <div class="links">
-            <a href="sdp/" class="link-button">📁 SDP Repository</a>
-            <a href="https://github.com/sulthoni" class="link-button">💻 GitHub Profile</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sulthoni - Developer Portfolio</title>
+    <meta
+      name="description"
+      content="Welcome to Sulthoni's personal portfolio. Explore my projects and connect with me."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="header">
+      <div class="header-content">
+        <img src="profile.jpg" alt="Sulthoni" class="profile-image" />
+        <h1>Sulthoni</h1>
+        <p class="tagline">Developer | Creator | Problem Solver</p>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="#about">👤 About</a>
+        <a href="#projects">💼 Projects</a>
+        <a href="#connect">🔗 Connect</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+      <!-- About Section -->
+      <section id="about" class="about-section">
+        <h2>👋 About Me</h2>
+        <p>
+          Hello! I'm Sulthoni, a passionate developer who loves building
+          innovative solutions and exploring new technologies. I enjoy turning
+          complex problems into simple, beautiful, and intuitive designs.
+        </p>
+        <p>
+          When I'm not coding, you can find me contributing to open-source
+          projects, learning new frameworks, or sharing knowledge with the
+          developer community.
+        </p>
+        <div class="skills">
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Web Development</span>
+          <span class="skill-tag">Open Source</span>
+          <span class="skill-tag">Problem Solving</span>
         </div>
-        
-        <div class="footer">
-            <p>&copy; 2026 Sulthoni. All rights reserved.</p>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="projects-section">
+        <h2>💼 Featured Projects</h2>
+        <div class="projects-grid">
+          <!-- SDP Project -->
+          <article class="project-card">
+            <div class="project-icon">📁</div>
+            <div class="project-content">
+              <h3>SDP Repository</h3>
+              <p>
+                Explore my SDP (Software Development Project) repository
+                featuring innovative solutions and comprehensive documentation.
+              </p>
+              <a href="sdp/" class="project-link"> View Project → </a>
+            </div>
+          </article>
+
+          <!-- Add more projects here -->
+          <article class="project-card">
+            <div class="project-icon">🚀</div>
+            <div class="project-content">
+              <h3>More Projects Coming Soon</h3>
+              <p>
+                I'm constantly working on new and exciting projects. Check back
+                soon or visit my GitHub profile for the latest updates.
+              </p>
+              <a href="https://github.com/sulthoni" class="project-link">
+                View GitHub →
+              </a>
+            </div>
+          </article>
         </div>
-    </div>
-</body>
+      </section>
+
+      <!-- Social/Connect Section -->
+      <section id="connect" class="social-section">
+        <h2>🔗 Let's Connect</h2>
+        <p>Feel free to reach out and connect with me on various platforms!</p>
+        <div class="social-links">
+          <a
+            href="https://github.com/sulthoni"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+          >
+            💻 GitHub
+          </a>
+          <a href="mailto:sulthoni@example.com" class="social-link">
+            ✉️ Email
+          </a>
+          <a
+            href="https://linkedin.com/in/sulthoni"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+          >
+            💼 LinkedIn
+          </a>
+          <a
+            href="https://twitter.com/sulthoni"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+          >
+            🐦 Twitter
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        &copy; <span class="current-year">2026</span> Sulthoni. Built with ❤️
+        and code.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>
