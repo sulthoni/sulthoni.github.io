@@ -1,80 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDP Repository - Sulthoni</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Statistical Data Production Ontology (SDPO) - Sulthoni</title>
+    <meta
+      name="description"
+      content="Statistical Data Production Ontology representing integrated statistical metadata for the statistical data production process"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #667eea;
+        --secondary-color: #764ba2;
+        --accent-color: #f5576c;
+        --text-dark: #2d3748;
+        --text-light: #718096;
+        --bg-light: #f7fafc;
+        --code-bg: #1e1e1e;
+        --code-text: #d4d4d4;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.8;
+        color: var(--text-dark);
+        background: var(--bg-light);
+      }
+
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--secondary-color) 100%
+        );
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .header .subtitle {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .nav {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .nav a {
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .nav a:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 30px;
+        padding: 10px 20px;
+        background: white;
+        color: var(--primary-color);
+        text-decoration: none;
+        border-radius: 8px;
+        border: 2px solid var(--primary-color);
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .back-link:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateX(-5px);
+      }
+
+      .section {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        color: var(--primary-color);
+        font-size: 2em;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid var(--primary-color);
+      }
+
+      h3 {
+        color: var(--text-dark);
+        font-size: 1.5em;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+      h4 {
+        color: var(--text-dark);
+        font-size: 1.2em;
+        margin-top: 25px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin-bottom: 15px;
+        color: var(--text-light);
+      }
+
+      ul,
+      ol {
+        margin-left: 30px;
+        margin-bottom: 20px;
+        color: var(--text-light);
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      .diagram-container {
+        text-align: center;
+        margin: 30px 0;
+        padding: 20px;
+        background: var(--bg-light);
+        border-radius: 8px;
+      }
+
+      .diagram-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .file-links {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin: 25px 0;
+      }
+
+      .file-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .file-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      code {
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9em;
+        color: var(--accent-color);
+      }
+
+      pre {
+        background: var(--code-bg);
+        color: var(--code-text);
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 20px 0;
+        font-family: "Courier New", monospace;
+        font-size: 0.9em;
+        line-height: 1.6;
+      }
+
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 0.9em;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      table thead {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+      }
+
+      table th,
+      table td {
+        padding: 12px 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      table tbody tr:nth-child(even) {
+        background: #f8f9fa;
+      }
+
+      table tbody tr:hover {
+        background: #f1f3f5;
+      }
+
+      .toc {
+        background: var(--bg-light);
+        padding: 20px 30px;
+        border-radius: 8px;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .toc h3 {
+        margin-top: 0;
+        color: var(--primary-color);
+      }
+
+      .toc ul {
+        list-style: none;
+        margin-left: 0;
+      }
+
+      .toc a {
+        color: var(--text-dark);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .toc a:hover {
+        color: var(--primary-color);
+      }
+
+      .competency-question {
+        background: #f8f9fa;
+        padding: 15px 20px;
+        border-left: 4px solid var(--secondary-color);
+        margin: 20px 0;
+        border-radius: 4px;
+      }
+
+      .note {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 4px;
+      }
+
+      .note strong {
+        color: #856404;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 1.8em;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+
+        .section {
+          padding: 25px;
         }
-        
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 100%;
+
+        table {
+          font-size: 0.8em;
         }
-        
-        h1 {
-            color: #f5576c;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            text-align: center;
+
+        .nav-container {
+          gap: 10px;
         }
-        
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            text-align: center;
-            color: #666;
-        }
-        
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .back-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
-        }
-        
-        .content {
-            text-align: center;
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>📁 SDP Repository</h1>
-        <div class="content">
-            <p>Welcome to the SDP (Software Development Project) repository section.</p>
-            <p>This area is dedicated to software development projects and resources.</p>
-            <a href="../" class="back-link">← Back to Home</a>
-        </div>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <h1>📊 Statistical Data Production Ontology (SDPO)</h1>
+      <p class="subtitle">
+        Integrated Statistical Metadata for Data Production Process
+      </p>
     </div>
-</body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="#description">Description</a>
+        <a href="#design">Design</a>
+        <a href="#evaluation">Evaluation</a>
+        <a href="#files">Files</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+      <a href="../" class="back-link"> ← Back to Home </a>
+
+      <!-- Description Section -->
+      <section id="description" class="section">
+        <h2>Description</h2>
+        <p>
+          Statistical Data Production Ontology is an ontology that aims to
+          represent an integrated statistical metadata, focusing on the
+          statistical data production process. The ontology is built based on
+          the existing metadata standards of:
+        </p>
+        <ul>
+          <li><strong>GSIM</strong> - Generic Statistical Information Model</li>
+          <li>
+            <strong>GSBPM</strong> - Generic Statistical Business Process Model
+          </li>
+          <li>
+            <strong>GAMSO</strong> - Generic Activity Model for Statistical
+            Organisations
+          </li>
+          <li>
+            <strong>CSPA</strong> - Common Statistical Production Architecture
+          </li>
+        </ul>
+        <p>
+          SDPO integrates metadata related to the statistical data production
+          process to provide a comprehensive overview and information on the
+          statistical data production process. In addition to enhancing users'
+          trust in the statistical data, integrated statistical metadata will
+          also:
+        </p>
+        <ul>
+          <li>
+            Facilitate the interoperability of metadata between data production
+            support systems
+          </li>
+          <li>
+            Improve the efficiency of statistical data production through the
+            reuse of existing metadata
+          </li>
+          <li>
+            Enable process automation through metadata-driven approaches,
+            simplify metadata management
+          </li>
+          <li>
+            Serve as the foundation for building statistical meta-data knowledge
+            management
+          </li>
+        </ul>
+      </section>
+
+      <!-- Design Section -->
+      <section id="design" class="section">
+        <h2>Design</h2>
+        <div class="diagram-container">
+          <img
+            src="images/GSBPM%20dan%20GSIM%20relation.png"
+            alt="GSBPM and GSIM Relation Diagram"
+          />
+        </div>
+        <p>
+          This repository provides two files with the following description:
+        </p>
+        <ul>
+          <li>
+            <strong>SDPO v1.1.ttl</strong> - The Statistical Data Production
+            ontology and the dummy data
+          </li>
+          <li>
+            <strong>SPARQL.txt</strong> - List of SPARQL queries to answer
+            Competency Questions 1-8
+          </li>
+        </ul>
+
+        <div class="file-links">
+          <a href="SDPO%20v1.1.ttl" class="file-link" download>
+            📄 Download SDPO v1.1.ttl
+          </a>
+          <a href="SPARQL.txt" class="file-link" download>
+            📝 Download SPARQL.txt
+          </a>
+          <a href="README.md" class="file-link" download>
+            📖 Download README.md
+          </a>
+        </div>
+      </section>
+
+      <!-- Evaluation Section -->
+      <section id="evaluation" class="section">
+        <h2>Evaluation</h2>
+        <p>
+          This section presents the functional test of SDPO against competency
+          questions using SPARQL queries. The data used for this testing
+          includes the 2020 Indonesia Population Census metadata and the Hungary
+          Retail Trades Statistics Survey metadata.
+        </p>
+
+        <!-- CQ1 -->
+        <div class="competency-question">
+          <h4>CQ1. What processes are required to conduct a survey?</h4>
+        </div>
+        <pre><code>PREFIX : &lt;https://w3id.org/sdp/core#&gt;
+
+SELECT
+    ?StatisticalProgram ?StatisticalProgramCycle ?BusinessProcess ?Process
+WHERE {
+    ?StatisticalProgram :hasSP-SPC ?StatisticalProgramCycle .
+    ?StatisticalProgramCycle :includesSPC-BP ?BusinessProcess .
+    ?BusinessProcess :hasBP-PS ?Process .
+} LIMIT 6</code></pre>
+        <p>
+          <strong>Result</strong> (Only a portion of the results is displayed)
+        </p>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>StatisticalProgram</th>
+                <th>StatisticalProgramCycle</th>
+                <th>BusinessProcess</th>
+                <th>Process</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>id-ps:PopulationCensusProgram</td>
+                <td>id-ps:PopulationCensusProgramCycle2020</td>
+                <td>id-ps:PopulationCensusBusinessProcess2020ShortForm</td>
+                <td>id-ps:SP2020DesignCollectionProcess</td>
+              </tr>
+              <tr>
+                <td>id-ps:PopulationCensusProgram</td>
+                <td>id-ps:PopulationCensusProgramCycle2020</td>
+                <td>id-ps:PopulationCensusBusinessProcess2020ShortForm</td>
+                <td>id-ps:SP2020DesignOutputProcess</td>
+              </tr>
+              <tr>
+                <td>kshrts:RetailTradeStatistics</td>
+                <td>kshrts:RetailTradeStatisticsProgramCycle</td>
+                <td>kshrts:RetailTradeStatisticsBusinessProcess</td>
+                <td>kshrts:CheckDataAvailabilityProcess</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CQ2 -->
+        <div class="competency-question">
+          <h4>CQ2. What metadata is required to create a survey?</h4>
+        </div>
+        <pre><code>PREFIX : &lt;https://w3id.org/sdp/core#&gt;
+PREFIX gsim-sum: &lt;https://w3id.org/italia/onto/gsim-sum#&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+
+SELECT
+    ?StatisticalProgram ?Process ?MetadataInput ?MetadataValue
+WHERE {
+    ?StatisticalProgram :hasSP-SPC ?StatisticalProgramCycle .
+    ?StatisticalProgramCycle :includesSPC-BP ?BusinessProcess .
+    ?BusinessProcess :hasBP-PS ?Process .
+    ?Process rdf:type :ProcessStep .
+    ?Process :hasPS-PI ?ProcessInput .
+    ?ProcessInput :refersToCI-IA ?MetadataInput.
+    ?MetadataInput ?p ?MetadataValue .
+    FILTER(CONTAINS(str(?p),"has") && !CONTAINS(str(?p),"hasName")).
+}</code></pre>
+
+        <!-- CQ3 -->
+        <div class="competency-question">
+          <h4>
+            CQ3. What metadata is produced by each process in the statistical
+            data production?
+          </h4>
+        </div>
+        <p>
+          Similar SPARQL queries are used to extract process outputs and
+          metadata values.
+        </p>
+
+        <!-- CQ4 -->
+        <div class="competency-question">
+          <h4>
+            CQ4. Do the production processes occur sequentially in accordance
+            with the order specified by GSBPM?
+          </h4>
+        </div>
+        <pre><code>PREFIX : &lt;https://w3id.org/sdp/core#&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+
+SELECT
+    ?StatisticalProgram ?Process ?ProcessCode ?Start ?End
+WHERE {
+    ?StatisticalProgram :hasSP-SPC / :includesSPC-BP / :hasBP-PS ?Process .
+    ?ProcessDesign :specifiesPD-PS ?Process .
+    ?ProcessDesign :classifiedAs-PD ?ProcessCode .
+    ?Process rdf:type :ProcessStep .
+    ?Process :hasStartTime-PS ?Start .
+    ?Process :hasEndTime-PS ?End .
+}</code></pre>
+
+        <!-- CQ5 -->
+        <div class="competency-question">
+          <h4>
+            CQ5. What metadata falls under the categories of planning,
+            implementation, dissemination, and evaluation?
+          </h4>
+        </div>
+        <p>
+          SPARQL queries categorize metadata by GSBPM phases (Specify Needs,
+          Design, Build, Collect, etc.).
+        </p>
+
+        <!-- CQ6 -->
+        <div class="competency-question">
+          <h4>
+            CQ6. Can the processes in statistical data production be audited?
+          </h4>
+        </div>
+        <p>
+          The ontology supports auditing through Process Execution Logs and
+          Change Definitions, enabling traceability of metadata changes
+          throughout the production process.
+        </p>
+
+        <!-- CQ7 -->
+        <div class="competency-question">
+          <h4>
+            CQ7. Is the design or planned process always consistent with the
+            actual process execution?
+          </h4>
+        </div>
+        <p>
+          SPARQL queries can compare process design specifications with actual
+          implementation to verify consistency.
+        </p>
+
+        <!-- CQ8 -->
+        <div class="competency-question">
+          <h4>
+            CQ8. What applications can be used to assist processes in
+            statistical data production?
+          </h4>
+        </div>
+        <pre><code>PREFIX : &lt;https://w3id.org/sdp/core#&gt;
+
+SELECT
+    ?StatisticalProgram ?Process ?ApplicationPackage
+WHERE {
+    ?StatisticalProgram :hasSP-SPC ?StatisticalProgramCycle .
+    ?StatisticalProgramCycle :includesSPC-BP ?BusinessProcess .
+    ?BusinessProcess :hasBP-PS ?Process .
+    ?Process :usePS-PKG ?ApplicationPackage.
+}</code></pre>
+
+        <div class="note">
+          <strong>Note:</strong> For complete SPARQL queries and full result
+          sets for all competency questions, please refer to the SPARQL.txt file
+          and README.md documentation.
+        </div>
+      </section>
+
+      <!-- Files Section -->
+      <section id="files" class="section">
+        <h2>Files & Resources</h2>
+        <p>Download the complete ontology and query files:</p>
+        <div class="file-links">
+          <a href="SDPO%20v1.1.ttl" class="file-link" download>
+            📄 SDPO v1.1.ttl
+          </a>
+          <a href="SPARQL.txt" class="file-link" download>
+            📝 SPARQL Queries
+          </a>
+          <a href="README.md" class="file-link" download>
+            📖 Full Documentation
+          </a>
+        </div>
+        <p style="margin-top: 20px">
+          <strong>Additional Resources:</strong>
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://unece.github.io/GSIM-2.0/"
+              target="_blank"
+              style="color: var(--primary-color)"
+              >GSIM Documentation</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://statswiki.unece.org/display/GSBPM/"
+              target="_blank"
+              style="color: var(--primary-color)"
+              >GSBPM Documentation</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://statswiki.unece.org/display/GAMSO/"
+              target="_blank"
+              style="color: var(--primary-color)"
+              >GAMSO Documentation</a
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
 </html>
